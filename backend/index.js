@@ -1,0 +1,23 @@
+const express = require("express");
+const app = express();
+const bodyParser = require("body-parser");
+const port = 3000;
+const cors = require("cors");
+const path = require("path");
+const rootPath = path.join(__dirname, "../");
+const home = require("./routes/signupRouter");
+
+app.use(express.json());
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+//Routers :
+app.use(home);
+app.use(express.static(path.join(rootPath, "frontend/public")));
+app.use(express.static(path.join(rootPath, "frontend/src")));
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(rootPath, "frontend/public", "index.html"));
+});
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}!`);
+});

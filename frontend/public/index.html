@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auth 2.0</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/output.css">
+</head>
+
+<body>
+  <style>
+  
+  </style>
+
+
+  
+
+  <div id="login" class="login | h-screen | grid grid-cols-1 md:grid-cols-loginParent grid-rows-1 | p-5 ">
+    <section class="login-main | h-full | flex | flex-col ">
+      <div class="login-main--logo | h-14">
+        <span class="text-xl  | font-bold | ">Your Logo</span>
+      </div>
+      
+      <div id="root"></div>
+
+    </section>
+
+    <section class="login-aside |  hidden md:flex flex-col | items-center | bg-dark-blue-bg | rounded-2xl | h-full | max-h-[700px]">
+      <div class="login-aside--contact | self-end | flex | items-center | space-x-1 | m-5  | text-white">
+        <img src="./images/phone-call.png" class="h-4/6" alt="">
+        <span class="text-sm | font-bold | cursor-pointer ">+91 7304 071 596</span>
+      </div>
+      <div class="login-aside--img | max-h-[65%] ">
+        <img src="./images/login-hero.png" class=" relative | bottom-6 |  h-full | w-full | " alt="login-mascot"
+          srcset="">
+      </div>
+
+      <div class="login-aside--content | self-start | lg:ml-24 mx-5 |  text-white | pt-2 pb-2">
+        <h3 class="lg:text-3xl md:text-2xl sm:text-xl | font-medium | mt-1">Sign in to [X]</h3>
+        <p class=" md:text-base sm:text-sm | text-gray-400 | mt-1">Enter the exciting world by logging into
+          the [X] and enjoy your time at it !</p>
+      </div>
+
+    </section>
+  </div>
+
+
+  <script src="/dist/main.js" type="module"></script>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!-- SIGN UP FORM -->
+<div class="logo-main--signup | flex flex-col gap-y-5  | w-11/12  lg:w-1/2 max-w-md | m-auto md:mx-auto "
+    id="signupContainer">
+    <h3 class="text-2xl md:text-3xl | font-medium">Sign up</h3>
+    <p class="text-base | font-normal | mt-3">If you don't have an account register </br> You can <span
+            class="| text-dark-blue-text | font-semibold | cursor-pointer" id="signupToLoginCTA"><a
+                id="sup" navigateTo="/sign-in">Login here !</a></span></p>
+
+    <div class='logo-main--form__container'>
+        <form action=" " id="signupForm">
+            <div class="input-group | my-3 | min-h-input">
+                <label for="email" class="text-label | block | text-sm">Email</label>
+                <div class="border-b-2 border-gray-600">
+                    <img src="./images/email.svg" class="inline-block | h-4" alt="">
+                    <input name="email" value="sumit894sumit@gmail.com" type="text"
+                        class="bg-transparent | text-base | focus:outline-0  | w-11/12"
+                        placeholder="Enter your email address" id="signupEmail" />
+                </div>
+                <p class="text-xs | relative top-0.5  | text-red-500 | hidden" id="signupEmailError">Please enter a
+                    valid
+                    email address.</p>
+
+            </div>
+            <div class="input-group | my-3 | min-h-input">
+                <label for="name" class="text-label | block | text-sm">Username</label>
+                <div class="border-b-2 border-gray-600">
+                    <img src="./images/user-name.png" class="inline-block | h-3.5" alt="">
+                    <input value="sumits" name="username" type="text"
+                        class="bg-transparent | text-base | focus:outline-0  | w-11/12"
+                        placeholder="Enter your User name" id="signupUsername" />
+                </div>
+                <p class="text-xs | relative top-0.5  | text-red-500 | hidden" id="signupEmailError">Username should be
+                    between 3-25 characters</p>
+
+            </div>
+
+            <div class="input-group | my-4 | min-h-input">
+                <label for="password" class="text-label | block | text-sm  ">Password</label>
+                <div class="border-b-2 | border-gray-600 | flex | items-center | space-x-1 | relative">
+                    <img src="./images/password.svg" class="inline-block | h-4" alt="">
+                    <input value="iamsumitM23@" name="password" type="text"
+                        class="bg-transparent | text-base | focus:outline-0 | flex-1 " placeholder="Enter you Password"
+                        id="signupPassword" autocomplete="off" maxlength="20">
+                    <img class="show-hide-password | cursor-pointer | active:invert |"
+                        src="./images/hide-password-icon.svg" data-password-type="hidden"
+                        data-show-password="./images/show-password-icon.svg"
+                        data-hide-password="./images/hide-password-icon.svg" alt="" srcset="">
+                </div>
+                <p class="text-xs | relative top-0.5  | text-red-500 | hidden" id="signupPasswordErr">password is not
+                    valid (8 characters,1 Lower/UpperCase,1 Special Char)</p>
+            </div>
+
+            <div class="input-group | my-4 | min-h-input">
+                <label for="password" class="text-label | block | text-sm  ">Confirm Password</label>
+                <div class="border-b-2 border-gray-600 | flex | items-center | space-x-1 | relative">
+                    <img src="./images/password.svg" class="inline-block | h-4" alt="">
+                    <input value="iamsumitM23@" type="password" name="password_confirmation"
+                        class="bg-transparent | text-base | focus:outline-0 | flex-1 "
+                        placeholder="Confirm your Password" id="signupConfirmPassword" autocomplete="off"
+                        maxlength="20">
+                    <img class="show-hide-password |  cursor-pointer | active:invert "
+                        src="./images/hide-password-icon.svg" data-password-type="hidden"
+                        data-show-password="./images/show-password-icon.svg"
+                        data-hide-password="./images/hide-password-icon.svg"
+                        data-hide-password-src="./images/hide-password-icon.svg" alt="" srcset="">
+                </div>
+                <p class="text-xs | relative top-0.5  | text-red-500 | hidden" id="signupConfirmPassErr">Passwords do
+                    not
+                    match</p>
+            </div>
+
+            <button type="submit" id="signupBtn"
+                class=" bg-blue-btn | w-full | rounded-full | text-white | py-3 | mt-3 mb-3 ">Register</button>
+        </form>
+    </div>
+
+</div>
