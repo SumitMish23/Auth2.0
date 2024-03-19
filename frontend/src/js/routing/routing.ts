@@ -1,16 +1,21 @@
+import SignUp from "../signup/signup.js";
+import Login from "../login/login.js";
 const Routing = async () => {
-
-  window.addEventListener("DOMContentLoaded", (event) => {
-    window.addEventListener('popstate', () => {
-        // navigate();
-    });
-  });
-
-
   document.addEventListener("navigate", e => {
     e.preventDefault();
     navigate(e?.detail);
   });
+  function loadJS(fileToLoad: string) {
+
+    switch (fileToLoad) {
+      case "signUp":
+        SignUp.init();
+        break;
+      case "signIn":
+        Login.init();
+        break;
+    }
+  }
   function initiateRouteEvents() {
     const navigateArr = Array.from(document.getElementsByTagName('a'));
     navigateArr.map((Link) => {
@@ -31,7 +36,7 @@ const Routing = async () => {
     } else {
       page = Routes[window.location.pathname];
     };
-
+    // debugger;
     const rootElement = document.getElementById('root');
     const rootParentElement = document.getElementById('login');
     try {
@@ -39,10 +44,13 @@ const Routing = async () => {
       let HTML = await response.text();
       if (page === '404Error') {
         rootParentElement.innerHTML = HTML;
-      } else {
-        rootElement.innerHTML = HTML;
-        return new Promise((resolve) => {
 
+
+      } else {
+        // debugger;
+        rootElement.innerHTML = HTML;
+        loadJS(page);
+        return new Promise((resolve) => {
           initiateRouteEvents();
           resolve(page);
         })
@@ -55,22 +63,33 @@ const Routing = async () => {
   function navigate(url = "") {
     const pathname: string = url || window.location.pathname;
     window.history.pushState({}, "", `${pathname}`);
-    window.dispatchEvent(new Event('popstate'));
-
     if (Routes[pathname]) {
-      return render(Routes[pathname]);
+      render(Routes[pathname]);
     } else {
-      return render('404Error');
+      render('404Error');
     }
 
   };
 
-  const Routes: { [key: string]: string } = {
-    "/": 'signUp',
-    "/sign-up": 'signUp',
-    "/sign-in": 'signIn',
+  const Routes: { [key: string]: string } = {};
+
+
+  function setRoutes(route: string, jsfile: string) {
+    if (Routes.hasOwnProperty(route)) {
+      return;
+    } else {
+      Routes[route] = jsfile;
+    }
   };
-  return navigate();
+
+  // Routes to be called :
+  setRoutes("/", "signUp");
+  setRoutes("/sign-up", "signUp");
+  setRoutes("/sign-in", "signIn");
+
+
+  // On page load first call signUp :
+  navigate('/');
 };
 
 export default Routing;

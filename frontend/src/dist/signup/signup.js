@@ -234,7 +234,7 @@ const SignUp = (function () {
     };
     return {
         init: function () {
-            alert('called signup');
+            // alert('called signup')
             showPasswordCTA();
             validateInputFields();
             handleFormSubmit();

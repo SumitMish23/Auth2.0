@@ -7,16 +7,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import SignUp from "../signup/signup.js";
+import Login from "../login/login.js";
 const Routing = () => __awaiter(void 0, void 0, void 0, function* () {
-    window.addEventListener("DOMContentLoaded", (event) => {
-        window.addEventListener('popstate', () => {
-            // navigate();
-        });
-    });
     document.addEventListener("navigate", e => {
         e.preventDefault();
         navigate(e === null || e === void 0 ? void 0 : e.detail);
     });
+    function loadJS(fileToLoad) {
+        switch (fileToLoad) {
+            case "signUp":
+                SignUp.init();
+                break;
+            case "signIn":
+                Login.init();
+                break;
+        }
+    }
     function initiateRouteEvents() {
         const navigateArr = Array.from(document.getElementsByTagName('a'));
         navigateArr.map((Link) => {
@@ -41,6 +48,7 @@ const Routing = () => __awaiter(void 0, void 0, void 0, function* () {
                 page = Routes[window.location.pathname];
             }
             ;
+            // debugger;
             const rootElement = document.getElementById('root');
             const rootParentElement = document.getElementById('login');
             try {
@@ -50,7 +58,9 @@ const Routing = () => __awaiter(void 0, void 0, void 0, function* () {
                     rootParentElement.innerHTML = HTML;
                 }
                 else {
+                    // debugger;
                     rootElement.innerHTML = HTML;
+                    loadJS(page);
                     return new Promise((resolve) => {
                         initiateRouteEvents();
                         resolve(page);
@@ -66,20 +76,29 @@ const Routing = () => __awaiter(void 0, void 0, void 0, function* () {
     function navigate(url = "") {
         const pathname = url || window.location.pathname;
         window.history.pushState({}, "", `${pathname}`);
-        window.dispatchEvent(new Event('popstate'));
         if (Routes[pathname]) {
-            return render(Routes[pathname]);
+            render(Routes[pathname]);
         }
         else {
-            return render('404Error');
+            render('404Error');
         }
     }
     ;
-    const Routes = {
-        "/": 'signUp',
-        "/sign-up": 'signUp',
-        "/sign-in": 'signIn',
-    };
-    return navigate();
+    const Routes = {};
+    function setRoutes(route, jsfile) {
+        if (Routes.hasOwnProperty(route)) {
+            return;
+        }
+        else {
+            Routes[route] = jsfile;
+        }
+    }
+    ;
+    // Routes to be called :
+    setRoutes("/", "signUp");
+    setRoutes("/sign-up", "signUp");
+    setRoutes("/sign-in", "signIn");
+    // On page load first call signUp :
+    navigate('/');
 });
 export default Routing;
