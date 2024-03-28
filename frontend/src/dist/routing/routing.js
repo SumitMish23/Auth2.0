@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import SignUp from "../signup/signup.js";
 import Login from "../login/login.js";
 const Routing = () => __awaiter(void 0, void 0, void 0, function* () {
+    const Routes = {};
     document.addEventListener("navigate", e => {
         e.preventDefault();
         navigate(e === null || e === void 0 ? void 0 : e.detail);
@@ -24,6 +25,7 @@ const Routing = () => __awaiter(void 0, void 0, void 0, function* () {
                 break;
         }
     }
+    ;
     function initiateRouteEvents() {
         const navigateArr = Array.from(document.getElementsByTagName('a'));
         navigateArr.map((Link) => {
@@ -84,13 +86,12 @@ const Routing = () => __awaiter(void 0, void 0, void 0, function* () {
         }
     }
     ;
-    const Routes = {};
-    function setRoutes(route, jsfile) {
+    function setRoutes(route, htmlFile) {
         if (Routes.hasOwnProperty(route)) {
             return;
         }
         else {
-            Routes[route] = jsfile;
+            Routes[route] = htmlFile;
         }
     }
     ;

@@ -1,6 +1,7 @@
 import SignUp from "../signup/signup.js";
 import Login from "../login/login.js";
 const Routing = async () => {
+  const Routes: { [key: string]: string } = {};
   document.addEventListener("navigate", e => {
     e.preventDefault();
     navigate(e?.detail);
@@ -15,7 +16,7 @@ const Routing = async () => {
         Login.init();
         break;
     }
-  }
+  };
   function initiateRouteEvents() {
     const navigateArr = Array.from(document.getElementsByTagName('a'));
     navigateArr.map((Link) => {
@@ -68,17 +69,16 @@ const Routing = async () => {
     } else {
       render('404Error');
     }
-
   };
 
-  const Routes: { [key: string]: string } = {};
 
 
-  function setRoutes(route: string, jsfile: string) {
+
+  function setRoutes(route: string, htmlFile: string) {
     if (Routes.hasOwnProperty(route)) {
       return;
     } else {
-      Routes[route] = jsfile;
+      Routes[route] = htmlFile;
     }
   };
 

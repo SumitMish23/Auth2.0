@@ -161,9 +161,10 @@ const SignUp = (function () {
                     signupPasswordHide.classList.add("opacity-0");
                 }
                 else {
+                    console.log("in");
                     element.setAttribute('src', element.getAttribute('data-hide-password'));
                     element.setAttribute('data-password-type', 'hidden');
-                    // change the input field to hide the password :
+                    // Change the input field to hide the password :
                     signupPassword.classList.add("opacity-0");
                     signupPasswordHide.classList.remove("opacity-0");
                 }
@@ -194,7 +195,7 @@ const SignUp = (function () {
     /* function to send data to the server for the signup: */
     function sendSignupData(e) {
         return __awaiter(this, void 0, void 0, function* () {
-            alert('Signup data');
+            // alert('Signup data')
             e.preventDefault();
             // check if any input value or faulty value is present or not :
             if (checkForEmptyValues()) {
@@ -229,12 +230,12 @@ const SignUp = (function () {
             }
         });
     }
+    ;
     const handleFormSubmit = () => {
         Utility.getIDOfTheInputElement('signupBtn').addEventListener("click", sendSignupData);
     };
     return {
         init: function () {
-            // alert('called signup')
             showPasswordCTA();
             validateInputFields();
             handleFormSubmit();

@@ -1,62 +1,66 @@
-<div
-class="logo-main--signin | x-flex flex-col gap-y-5 x-md:block   | w-11/12  lg:w-1/2 max-w-md | m-auto md:mx-auto |"
-id="loginContainer">
-<h3 class="text-2xl md:text-3xl | font-medium">Sign in</h3>
-<p class="text-base | font-normal | mt-3">If you don't have an account register </br> You can <span
-    class=" text-dark-blue-text | font-semibold | cursor-pointer" id="loginToSignupCTA"><a navigateTo='/sign-up'>Register here !</a></span>
-</p>
+<div class="logo-main--signin | x-flex flex-col gap-y-5 x-md:block   | w-11/12  lg:w-1/2 max-w-md | m-auto md:mx-auto |"
+  id="loginContainer">
+  <h3 class="text-2xl md:text-3xl | font-medium">Sign in</h3>
+  <p class="text-base | font-normal | mt-3">If you don't have an account register </br> You can <span
+      class=" text-dark-blue-text | font-semibold | cursor-pointer" id="loginToSignupCTA"><a
+        navigateTo='/sign-up'>Register here !</a></span>
+  </p>
 
-<div class='logo-main--form__container'>
-  <form action="">
-    <div class="input-group | mt-4 mb-2 | min-h-input">
-      <label for="email" class="text-label | block | text-sm">Email</label>
-      <div class="border-b-2 border-gray-600">
-        <img src="./images/email.svg" class="inline-block | h-4" alt="">
-        <input type="text" class="bg-transparent | text-base | focus:outline-0  | w-11/12"
-          placeholder="Enter your email address" id="email" />
+  <div class='logo-main--form__container'>
+    <form action="">
+      <div class="input-group | mt-4 mb-2 | min-h-input">
+        <label for="email" class="text-label | block | text-sm">Email</label>
+        <div class="border-b-2 border-gray-600">
+          <img src="./images/email.svg" class="inline-block | h-4" alt="">
+
+          <input type="text" class="bg-transparent | text-base | focus:outline-0 | w-11/12"
+            placeholder="Enter your email address" id="email" />
+
+        </div>
+        <p class="text-xs | relative top-0.5  | text-red-500 | hidden" id="loginEmailError">Please enter a valid
+          email address.</p>
       </div>
-      <p class="text-xs | relative top-0.5  | text-red-500 | hidden" id="loginEmailError">Please enter a valid
-        email address.</p>
-    </div>
-    <div class="input-group | my-4 | min-h-input">
-      <label for="password" class="text-label | block | text-sm  ">Password</label>
-      <div class="border-b-2 border-gray-600 | flex | items-center | space-x-1">
-        <img src="./images/password.svg" class="inline-block | h-4" alt="">
-        <input type="password" class="bg-transparent | text-base | focus:outline-0 | flex-1 "
-          placeholder="Enter you password" id="password">
-        <img class="cursor-pointer | active:invert" src="./images/hide-password-icon.svg" data-status="hidden"
-          data-show-password-src="./images/show-password-icon.svg"
-          data-hide-password-src="./images/hide-password-icon.svg" alt="" srcset="" id="passwordHideCTA">
+      <div class="input-group | my-4 | min-h-input">
+        <label for="password" class="text-label | block | text-sm  ">Password</label>
+        <div class="border-b-2 border-gray-600 | flex | items-center | space-x-1">
+          <img src="./images/password.svg" class="inline-block | h-4" alt="">
+          <input type="password" class="bg-transparent | text-base | focus:outline-0 | flex-1 "
+            placeholder="Enter you password" id="password">
+          <img class="cursor-pointer | active:invert" src="./images/hide-password-icon.svg" data-status="hidden"
+            data-show-password-src="./images/show-password-icon.svg"
+            data-hide-password-src="./images/hide-password-icon.svg" alt="" srcset="" id="passwordHideCTA">
+        </div>
+        <p class="text-xs | relative top-0.5  | text-red-500 | hidden" id="loginPasswordErr">password is not
+          valid (8 characters,1 Lower/UpperCase,1 Special Char)</p>
+
       </div>
-      <p class="text-xs | relative top-0.5  | text-red-500 | hidden" id="loginPasswordErr">password is not
-        valid (8 characters,1 Lower/UpperCase,1 Special Char)</p>
+      <div class="input-group__check | flex | justify-between | items-center">
+        <label for="password | relative">
+          <input type="checkbox" id="rememberMe" class="remember-box">
+          <span class="checkmark | text-sm"></span> <span class="mr-2 | text-sm">Remember me</span>
 
-    </div>
-    <div class="input-group__check | flex | justify-between | items-center">
-      <label for="password | relative">
-        <input type="checkbox" id="rememberMe" class="remember-box">
-        <span class="checkmark | text-sm"></span> <span class="mr-2 | text-sm">Remember me</span>
-      </label>
-      <p class="input--group__password-reset | text-sm | cursor-pointer | self-end">Forgot Password ?</p>
-    </div>
-    <button type="submit"
-      class=" bg-blue-btn | w-full | rounded-full | text-white | py-3 | mt-4 mb-3">Login</button>
-  </form>
-</div>
-<div class="login-main--socials__container | my-3">
-  <p class="text-center | text-gray-600 | font-medium">or continue with</p>
+          . </label>
+        <p class="input--group__password-reset | text-sm | cursor-pointer | self-end">Forgot Password ?</p>
+      </div>
+      <button type="submit" class=" bg-blue-btn | w-full | rounded-full | text-white | py-3 | mt-4 mb-3"
+        id="loginBtn">Login</button>
+    </form>
+  </div>
+  <div class="login-main--socials__container | my-3">
+    <p class="text-center | text-gray-600 | font-medium">or continue with</p>
 
-  <div class="logo-main--img | flex | justify-center | space-x-6 | mt-4">
-    <a href="">
-      <img src="./images/facebook.png" alt="">
-    </a>
-    <a href="">
-      <img src="./images/google.png" alt="">
-    </a>
-    <a href="">
-      <img src="./images/apple.png" alt="">
-    </a>
+    <div class="logo-main--img | flex | justify-center | space-x-6 | mt-4">
+      <a href="">
+        <img src="./images/facebook.png" alt="">
+      </a>
+      <a href="">
+        <img src="./images/google.png" alt="">
+      </a>
+      <a href="">
+        <img src="./images/apple.png" alt="">
+      </a>
+    </div>
   </div>
 </div>
-</div>
 
+<button id="demo" class="bg-red-400 p-4 py-2 rounded-lg">HIT API !</button>

@@ -6,6 +6,7 @@ const validator = (body, rules, customMessages, callback) => {
   validation.fails(() => callback(validation.errors, false));
 };
 module.exports = (req, res) => {
+  
   const validationRule = {
     email: "required|string|email",
     username: "required|string|min:3|max:25",

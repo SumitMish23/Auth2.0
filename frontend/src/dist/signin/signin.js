@@ -74,7 +74,6 @@ const Login = (function () {
     };
     return {
         init: function () {
-            alert('in login')
             validateInputFields();
             hidePassword();
         }

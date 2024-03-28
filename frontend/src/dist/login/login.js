@@ -1,6 +1,7 @@
 import Utility from "../common/utility.js";
 const Login = (function () {
     // Initialize the variables and functions:
+    let inputFieldValidated = { email: false, password: false };
     const hidePassword = () => {
         const hideBtn = Utility.getIDOfTheInputElement('passwordHideCTA');
         const passwordInput = Utility.getIDOfTheInputElement("password");
@@ -24,7 +25,6 @@ const Login = (function () {
                 const target = event.target;
                 const elementId = target.id;
                 const inputValue = target.value;
-                let rememberMeSelected = false;
                 switch (elementId) {
                     case 'email':
                         const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
@@ -32,6 +32,7 @@ const Login = (function () {
                             Utility.getIDOfTheInputElement('loginEmailError').classList.remove('hidden');
                         }
                         else {
+                            inputFieldValidated = Object.assign(Object.assign({}, inputFieldValidated), { email: true });
                             Utility.getIDOfTheInputElement('loginEmailError').classList.add('hidden');
                         }
                         break;
@@ -43,6 +44,7 @@ const Login = (function () {
                         }).length;
                         let errorBox = Utility.getIDOfTheInputElement('loginPasswordErr');
                         let showError = true;
+                        inputFieldValidated = Object.assign(Object.assign({}, inputFieldValidated), { password: false });
                         switch (true) {
                             case (inputValue.length <= 3 || inputValue.length >= 25):
                                 passErrMessage = 'Password length must be between 3 and 25 characters.';
@@ -55,6 +57,7 @@ const Login = (function () {
                                 break;
                             default:
                                 showError = false;
+                                inputFieldValidated = Object.assign(Object.assign({}, inputFieldValidated), { password: true });
                                 break;
                         }
                         if (showError && inputValue.length > 0) {
@@ -72,10 +75,48 @@ const Login = (function () {
             });
         });
     };
+    const handleLogin = () => {
+        Utility.getIDOfTheInputElement('loginBtn').addEventListener('click', function (event) {
+            event.preventDefault();
+            let returnFunc = false;
+            Object.entries(inputFieldValidated).forEach((value) => {
+                if (value[1] == false) {
+                    returnFunc = true;
+                }
+            });
+            if (returnFunc) {
+                return;
+            }
+            ;
+            const email = Utility.getIDOfTheInputElement('email').value;
+            const password = Utility.getIDOfTheInputElement('password').value;
+            let data = JSON.stringify({ email: email, password: password });
+            // Fetch api for the sign in :
+            fetch('http://localhost:3000/mishra', {
+                method: 'POST',
+                body: data,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }).then((response) => response.json()).then((data) => {
+                if (data.accessToken)
+                    Utility.setAccessToken(data.accessToken);
+            });
+        });
+    };
     return {
         init: function () {
             validateInputFields();
             hidePassword();
+            handleLogin();
+            Utility.getIDOfTheInputElement('demo').addEventListener("click", function () {
+                Utility.fetchAPI('http://localhost:3000/sureshsudha', {
+                    method: "GET",
+                    headers: {
+                        'Content-type': 'application/x-www-form-urlencoded'
+                    }
+                });
+            });
         }
     };
 })();

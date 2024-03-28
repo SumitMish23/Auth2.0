@@ -20,12 +20,11 @@ const SignUp = (function () {
       });
     })
   };
- 
+
 
 
   // validate user input fields:
   const validateInputFields = () => {
-
     let CONFIRM_PASSWORD = '';
     let passwordInput = Utility.getIDOfTheInputElement("signupPassword");
     let passwordInputConfirm = Utility.getIDOfTheInputElement("signupConfirmPassword")
@@ -147,19 +146,20 @@ const SignUp = (function () {
         }
       })
     });
-
-
   }
 
   /* function to show the password : */
   let showPasswordCTA = () => {
     let passwordElements = document.querySelectorAll(".show-hide-password");
     [...passwordElements].map((element, index) => {
+
       element.addEventListener("click", (event: Event) => {
+
         let id = "signupPassword";
         if (index == 1) {
           id = "signupConfirmPassword"
         }
+
         let signupPassword = Utility.getIDOfTheInputElement(id);
         let signupPasswordHide = Utility.getIDOfTheInputElement(id + "Hide")
 
@@ -173,11 +173,11 @@ const SignUp = (function () {
           signupPasswordHide.classList.add("opacity-0");
 
         } else {
-
+          console.log("in");
           element.setAttribute('src', (element.getAttribute('data-hide-password') as string));
           element.setAttribute('data-password-type', 'hidden');
 
-          // change the input field to hide the password :
+          // Change the input field to hide the password :
           signupPassword.classList.add("opacity-0");
           signupPasswordHide.classList.remove("opacity-0");
         }
@@ -212,7 +212,7 @@ const SignUp = (function () {
 
   /* function to send data to the server for the signup: */
   async function sendSignupData(e: Event) {
-    alert('Signup data')
+    // alert('Signup data')
     e.preventDefault();
 
     // check if any input value or faulty value is present or not :
@@ -248,25 +248,20 @@ const SignUp = (function () {
     finally {
 
     }
+  };
 
-
-
-
-  }
   const handleFormSubmit = () => {
     Utility.getIDOfTheInputElement('signupBtn').addEventListener("click", sendSignupData);
 
   }
   return {
     init: function () {
-      // alert('called signup')
       showPasswordCTA();
       validateInputFields();
       handleFormSubmit();
       disableCopyEvents();
-
+    
     }
-  }
-
+  };
 })();
 export default SignUp;

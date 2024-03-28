@@ -1,12 +1,13 @@
-const { Router } = require('express'); 
-const app = Router(); 
-const signup=require("../controllers/signupController.js");
-const { createUser } = require('../mongodb/db.js'); 
+const { Router } = require("express");
+const app = Router();
 
+const signup = require("../controllers/signupController.js");
+const signin = require("../controllers/signinController.js");
 
-// method call and calling controller :
+// Method call and calling controller :
 
-app.post("/sumit", signup); 
+app.post("/sumit", signup);
+app.post("/mishra", signin);
 
-// exporting :
+// Exporting :
 module.exports = app;
