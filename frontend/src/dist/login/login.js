@@ -25,6 +25,7 @@ const Login = (function () {
                 const target = event.target;
                 const elementId = target.id;
                 const inputValue = target.value;
+                let rememberMeSelected = false;
                 switch (elementId) {
                     case 'email':
                         const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
@@ -91,7 +92,7 @@ const Login = (function () {
             const email = Utility.getIDOfTheInputElement('email').value;
             const password = Utility.getIDOfTheInputElement('password').value;
             let data = JSON.stringify({ email: email, password: password });
-            // Fetch api for the sign in :
+            // Fetch API for the Sign In :
             fetch('http://localhost:3000/mishra', {
                 method: 'POST',
                 body: data,
@@ -99,8 +100,11 @@ const Login = (function () {
                     "Content-Type": "application/json",
                 },
             }).then((response) => response.json()).then((data) => {
+                // Set the tokens in session storage 
                 if (data.accessToken)
                     Utility.setAccessToken(data.accessToken);
+                if (data.refreshToken)
+                    Utility.setRefreshToken(data.refreshToken);
             });
         });
     };
@@ -109,9 +113,11 @@ const Login = (function () {
             validateInputFields();
             hidePassword();
             handleLogin();
+            console.log(document.getElementById('password'));
+            /* document.getElementById('password')?.value='iamsumitM23@'; */
             Utility.getIDOfTheInputElement('demo').addEventListener("click", function () {
-                Utility.fetchAPI('http://localhost:3000/sureshsudha', {
-                    method: "GET",
+                const response = Utility.fetchAPI('http://localhost:3000/sureshsudha', {
+                    method: "POST",
                     headers: {
                         'Content-type': 'application/x-www-form-urlencoded'
                     }

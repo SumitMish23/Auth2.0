@@ -1,9 +1,11 @@
 require("dotenv").config();
 const { loginUser } = require("../mongodb/db");
+const {
+  generateAccessToken,
+  generateRefreshAccessToken,
+} = require("../auth/AuthenticationJWT");
 
-const jwt = require("jsonwebtoken");
 const signIn = (req, res) => {
-  console.log(req.headers)
   const Validator = require("validatorjs");
   const validationRule = {
     email: "required|string|email",
@@ -24,18 +26,20 @@ const signIn = (req, res) => {
         message: "Validation failed",
       });
     } else {
-      const accessToken = jwt.sign(
-        req.body?.email?.split("@")[0],
-        process.env.ACCESS_TOKEN_SECRET_KEY
-      );
-      loginUser(req.body).then((data) => {
-        console.log(data);
+      loginUser(req.body).then(async (data) => {
+        console.log(data, "login data");
         if (data.status === 200) {
+          const accessToken = await generateAccessToken(req.body);
+          const refreshToken = await generateRefreshAccessToken(req.body);
+        
+          if (!refreshToken || !accessToken)
+            data.message = "Token Invalidation";
           res.status(200).send({
             success: true,
             status: data.status,
             message: data.message,
-            accessToken
+            accessToken,
+            refreshToken,
           });
         } else {
           res.status(data.status).send({

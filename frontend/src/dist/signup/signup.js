@@ -171,7 +171,7 @@ const SignUp = (function () {
             });
         });
     };
-    /* function to check any empty input field value when submitting : */
+    /* Function to check any empty input field value when submitting : */
     const checkForEmptyValues = () => {
         var _a, _b;
         let inputContainer = [...document.querySelectorAll('#signupContainer input')];
@@ -192,21 +192,21 @@ const SignUp = (function () {
         }
         return isError || !isUnresolvedError;
     };
-    /* function to send data to the server for the signup: */
+    /* Function to send data to the server for the signup: */
     function sendSignupData(e) {
         return __awaiter(this, void 0, void 0, function* () {
             // alert('Signup data')
             e.preventDefault();
-            // check if any input value or faulty value is present or not :
+            // Check if any input value or faulty value is present or not :
             if (checkForEmptyValues()) {
                 return;
             }
-            // intialize form data objects :
+            // Intialize form data objects :
             let form = Utility.getIDOfTheInputElement('signupForm');
             let formData = new FormData(form);
             formData.delete('passwordCloned');
             formData.delete('confirmPasswordCloned');
-            // calling the api :
+            // Calling the api :
             const response = yield fetch('http://localhost:3000/sumit', {
                 method: "POST",
                 body: new URLSearchParams(formData).toString(),

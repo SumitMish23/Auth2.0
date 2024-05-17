@@ -1,4 +1,58 @@
 const { connect, getDb } = require("../mongodb/connectDB");
+
+/*  Get Value from the DB */
+async function checkIfValueExists(
+  collectionName,
+  fieldName,
+  fieldValue,
+  valueToBeReturned = ""
+) {
+  try {
+    const connectionStatus = await connect();
+    if (connectionStatus == 200) {
+      const db = getDb();
+      const value = await db
+        .collection(collectionName)
+        .find({ [fieldName]: fieldValue });
+      const document = await value.toArray();
+      if (document) {
+        if (valueToBeReturned) {
+          return document[0][valueToBeReturned]
+            ? document[0][valueToBeReturned]
+            : null;
+        } else {
+          return document[0][fieldName]; // Return the value of the specified field
+        }
+      } else {
+        return null; // Field value not found
+      }
+    }
+  } catch (e) {
+    return e;
+  }
+}
+
+async function addFieldToDocument(
+  collectionName,
+  query,
+  fieldName,
+  fieldValue
+) {
+  try {
+    const connectionStatus = await connect();
+    if (connectionStatus == 200) {
+      const db = getDb();
+      const result = await db
+        .collection(collectionName)
+        .updateOne(query, { $set: { [fieldName]: fieldValue } });
+      return {status: 200, message: "Field Added" };
+      }
+  } catch (error) {
+    console.error("Error adding field to document:", error);
+    throw error;
+  }
+}
+
 async function createUser(data) {
   try {
     const connectionStatus = await connect();
@@ -49,4 +103,9 @@ async function loginUser(data) {
   }
 }
 
-module.exports = { createUser, loginUser };
+module.exports = {
+  createUser,
+  loginUser,
+  addFieldToDocument,
+  checkIfValueExists,
+};

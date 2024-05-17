@@ -6,7 +6,6 @@ const validator = (body, rules, customMessages, callback) => {
   validation.fails(() => callback(validation.errors, false));
 };
 module.exports = (req, res) => {
-  
   const validationRule = {
     email: "required|string|email",
     username: "required|string|min:3|max:25",
@@ -23,7 +22,6 @@ module.exports = (req, res) => {
         message: "Validation failed",
       });
     } else {
-      let response = "";
       createUser(req.body).then((data) => {
         if (data) {
           res.status(200).send({

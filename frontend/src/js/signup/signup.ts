@@ -185,7 +185,7 @@ const SignUp = (function () {
     })
   };
 
-  /* function to check any empty input field value when submitting : */
+  /* Function to check any empty input field value when submitting : */
 
   const checkForEmptyValues = () => {
     let inputContainer = [...document.querySelectorAll('#signupContainer input')];
@@ -210,22 +210,22 @@ const SignUp = (function () {
 
   }
 
-  /* function to send data to the server for the signup: */
+  /* Function to send data to the server for the signup: */
   async function sendSignupData(e: Event) {
     // alert('Signup data')
     e.preventDefault();
 
-    // check if any input value or faulty value is present or not :
+    // Check if any input value or faulty value is present or not :
     if (checkForEmptyValues()) {
       return;
     }
 
-    // intialize form data objects :
+    // Intialize form data objects :
     let form = Utility.getIDOfTheInputElement('signupForm');
     let formData = new FormData(form);
     formData.delete('passwordCloned');
-    formData.delete('confirmPasswordCloned')
-    // calling the api :
+    formData.delete('confirmPasswordCloned');
+    // Calling the api :
     const response = await fetch('http://localhost:3000/sumit', {
       method: "POST",
       body: new URLSearchParams(formData as any).toString(),
@@ -252,8 +252,7 @@ const SignUp = (function () {
 
   const handleFormSubmit = () => {
     Utility.getIDOfTheInputElement('signupBtn').addEventListener("click", sendSignupData);
-
-  }
+  };
   return {
     init: function () {
       showPasswordCTA();
