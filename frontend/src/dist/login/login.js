@@ -1,3 +1,12 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 import Utility from "../common/utility.js";
 const Login = (function () {
     // Initialize the variables and functions:
@@ -115,12 +124,15 @@ const Login = (function () {
             handleLogin();
             console.log(document.getElementById('password'));
             /* document.getElementById('password')?.value='iamsumitM23@'; */
-            Utility.getIDOfTheInputElement('demo').addEventListener("click", function () {
-                const response = Utility.fetchAPI('http://localhost:3000/sureshsudha', {
-                    method: "POST",
-                    headers: {
-                        'Content-type': 'application/x-www-form-urlencoded'
-                    }
+            Utility.getIDOfTheInputElement('googleAuthenticator').addEventListener("click", function () {
+                return __awaiter(this, void 0, void 0, function* () {
+                    const response = yield Utility.fetchAPI('http://localhost:3000/google-authenticate', {
+                        method: "POST",
+                        headers: {
+                            'Content-type': 'application/x-www-form-urlencoded'
+                        }
+                    });
+                    window.location.href = response.authorizeUrl;
                 });
             });
         }

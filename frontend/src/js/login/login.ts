@@ -115,16 +115,17 @@ const Login = (function () {
       validateInputFields();
       hidePassword();
       handleLogin();
-      console.log( document.getElementById('password'));
+      console.log(document.getElementById('password'));
       /* document.getElementById('password')?.value='iamsumitM23@'; */
-      Utility.getIDOfTheInputElement('demo').addEventListener("click", function () {
+      Utility.getIDOfTheInputElement('googleAuthenticator').addEventListener("click", async function () {
 
-        const response = Utility.fetchAPI('http://localhost:3000/sureshsudha', {
+        const response = await Utility.fetchAPI('http://localhost:3000/google-authenticate', {
           method: "POST",
           headers: {
             'Content-type': 'application/x-www-form-urlencoded'
           }
-        })
+        });
+        window.location.href = response.authorizeUrl;
       })
     }
   };

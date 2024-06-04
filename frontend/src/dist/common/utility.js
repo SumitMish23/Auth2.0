@@ -47,7 +47,7 @@ function Utility() {
             });
             const { accessToken } = yield response.json();
             if (!accessToken)
-                return;
+                return false;
             return accessToken;
         });
     };
@@ -57,15 +57,16 @@ function Utility() {
             try {
                 const responseFromApi = yield fetch(url, Object.assign(Object.assign({}, params), { headers: headers }));
                 const response = yield responseFromApi.json();
-                // IF TOKEN IS EXPIRED OR INCORRECT .
+                /* IF TOKEN IS EXPIRED OR INCORRECT */
                 if (response.status === 400) {
                     const newAccessToken = yield this.checkForExpiredToken();
                     this.setAccessToken(newAccessToken);
                     headers = Object.assign(Object.assign({}, params.headers), { Authorization: `Bearer ${this.getAccessToken()}` });
-                    return yield fetch(url, Object.assign(Object.assign({}, params), { headers: headers }));
+                    const apiResponse = yield fetch(url, Object.assign(Object.assign({}, params), { headers: headers }));
+                    return yield apiResponse.json();
                 }
                 else {
-                    return responseFromApi;
+                    return response;
                 }
             }
             catch (e) {

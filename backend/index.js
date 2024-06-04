@@ -13,14 +13,14 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
-// Apply the middleware to all routes for JWT  :
+/* Apply the middleware to all routes for JWT  : */
 app.use(authenticateJwtToken);
 
-//Routers :
+/* Routers : */
 app.use(home);
 app.use(express.static(path.join(rootPath, "frontend/public")));
 app.use(express.static(path.join(rootPath, "frontend/src")));
-app.get("/*", (req, res) => {
+app.get(["/","/sign-in"], (req, res) => {
   res.sendFile(path.join(rootPath, "frontend/public", "index.html"));
 });
 app.listen(port, () => {

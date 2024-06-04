@@ -33,29 +33,30 @@ function Utility(this: any) {
       },
     });
 
-    const { accessToken } =await response.json();
-    if (!accessToken) return
+    const { accessToken } = await response.json();
+    if (!accessToken) return false;
     return accessToken;
   };
   this.fetchAPI = async function (url: string, params: any) {
-    let headers = {...params.headers,Authorization: `Bearer ${this.getAccessToken()}`};
+    let headers = { ...params.headers, Authorization: `Bearer ${this.getAccessToken()}` };
     try {
-     const responseFromApi = await fetch(url, {
+      const responseFromApi = await fetch(url, {
         ...params,
         headers: headers,
       });
       const response = await responseFromApi.json();
-      // IF TOKEN IS EXPIRED OR INCORRECT .
+      /* IF TOKEN IS EXPIRED OR INCORRECT */
       if (response.status === 400) {
-        const newAccessToken =await this.checkForExpiredToken();
+        const newAccessToken = await this.checkForExpiredToken();
         this.setAccessToken(newAccessToken);
-        headers = {...params.headers,Authorization: `Bearer ${this.getAccessToken()}`};
-        return await fetch(url, {
+        headers = { ...params.headers, Authorization: `Bearer ${this.getAccessToken()}` };
+        const apiResponse = await fetch(url, {
           ...params,
           headers: headers,
         });
+        return await apiResponse.json();
       } else {
-        return responseFromApi;
+        return response;
       }
     } catch (e) {
       console.log("Error fetching the API :", e);

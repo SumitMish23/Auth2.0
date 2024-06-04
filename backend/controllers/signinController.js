@@ -26,6 +26,7 @@ const signIn = (req, res) => {
         message: "Validation failed",
       });
     } else {
+      console.log('isnide------------------------')
       loginUser(req.body).then(async (data) => {
         console.log(data, "login data");
         if (data.status === 200) {
