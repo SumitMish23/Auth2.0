@@ -20,7 +20,11 @@ app.use(authenticateJwtToken);
 app.use(home);
 app.use(express.static(path.join(rootPath, "frontend/public")));
 app.use(express.static(path.join(rootPath, "frontend/src")));
-app.get(["/","/sign-in"], (req, res) => {
+app.use(express.static(path.join(rootPath, "frontend/x/build")));
+app.get('/chaitri',(_,res)=>{
+  res.sendFile(path.join(rootPath,"frontend/x/build","index.html"))
+});
+app.get(["/","/sign-in"], (_, res) => {
   res.sendFile(path.join(rootPath, "frontend/public", "index.html"));
 });
 app.listen(port, () => {
