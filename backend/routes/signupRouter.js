@@ -17,7 +17,7 @@ app.post("/sureshsudha", (req, res) => {
 });
 app.post("/refresh-token", validateRefreshToken);
 app.post("/google-authenticate", async function (_,res) {
-  console.log('Inside !')
+ 
   const oAuth2Client = new OAuth2Client(
     process.env.CLIENT_ID,
     process.env.CLIENT_SECRET,
