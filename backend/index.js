@@ -21,7 +21,7 @@ app.use(home);
 app.use(express.static(path.join(rootPath, "frontend/public")));
 app.use(express.static(path.join(rootPath, "frontend/src")));
 app.use(express.static(path.join(rootPath, "frontend/x/build")));
-app.get('/chaitri',(_,res)=>{
+app.get('/',(_,res)=>{
   res.sendFile(path.join(rootPath,"frontend/x/build","index.html"))
 });
 app.get(["/","/sign-in"], (_, res) => {
